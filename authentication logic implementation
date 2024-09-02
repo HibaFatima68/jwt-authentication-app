@@ -1,0 +1,23 @@
+@PostMapping("/authenticate")
+public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequest request) {
+    String username = request.getUsername();
+    String password = request.getPassword();
+    
+    // Hardcoded credentials for demonstration purposes
+    String hardcodedUsername = "user";
+    String hardcodedPassword = "hashedPassword";
+    
+    if (username.equals(hardcodedUsername) && password.equals(hardcodedPassword)) {
+        // Generate a JWT token
+        String token = generateToken(username);
+        return ResponseEntity.ok(token);
+    } else {
+        return ResponseEntity.badRequest().body("Invalid credentials");
+    }
+}
+
+private String generateToken(String username) {
+    // Implement JWT token generation logic here
+    // For demonstration purposes, I'll use a simple token
+    return "Bearer " + username + ":token";
+}
